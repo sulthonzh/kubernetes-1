@@ -5,6 +5,10 @@ This repo provides the config to run the micro platform on kubernetes
 An example deployment is currently running at [web.micro.pm](http://web.micro.pm) 
 leveraging Google Container Engine.
 
+Note: This is by no means a highly available deployment. It's for testing purposes. 
+In the future we'll lay out a highly scalable and fault tolerant regional and 
+global deployment model.
+
 ## What's in the repo?
 
 Currently config to run Micro on Kubernetes (Testing on Google Container Engine).
