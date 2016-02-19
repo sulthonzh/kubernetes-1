@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: geo-srv
+spec:
+  replicas: 1
+  selector:
+    name: geo-srv
+  template:
+    metadata:
+      labels:
+        name: geo-srv
+    spec:
+      containers:
+        - name: discovery
+          command: [
+		"/geo-srv",
+		"--registry=consul",
+		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"--logtostderr",
+		"--server_address=0.0.0.0:9090",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/geo-srv
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: geo-srv-port

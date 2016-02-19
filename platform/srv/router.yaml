@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: platform-router
+spec:
+  replicas: 1
+  selector:
+    name: platform-router
+  template:
+    metadata:
+      labels:
+        name: platform-router
+    spec:
+      containers:
+        - name: router
+          command: [
+		"/platform",
+		"--registry=consul",
+		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"--logtostderr",
+		"--server_address=0.0.0.0:9090",
+		"--broker_address=0.0.0.0:10001",
+		"--database_url=router:router@tcp($(PXC_CLUSTER_SERVICE_HOST):$(PXC_CLUSTER_SERVICE_PORT))/router",
+		"--register_ttl=60",
+		"--register_interval=30",
+		"router",
+		"srv"
+	  ]
+          image: microhq/platform
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: router-port
+          - containerPort: 10001
+            name: broker-port

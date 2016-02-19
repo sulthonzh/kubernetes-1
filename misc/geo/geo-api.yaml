@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: geo-api
+spec:
+  replicas: 1
+  selector:
+    name: geo-api
+  template:
+    metadata:
+      labels:
+        name: geo-api
+    spec:
+      containers:
+        - name: discovery
+          command: [
+		"/geo-api",
+		"--registry=consul",
+		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"--logtostderr",
+		"--server_address=0.0.0.0:9090",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/geo-api
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: geo-api-port
