@@ -27,9 +27,9 @@ Missing
 
 Micro Demo (SSL soon):
 
-- API [api.micro.pm](http://api.micro.pm)
-- Web UI [web.micro.pm](http://web.micro.pm)
-- Sidecar [proxy.micro.pm](http://proxy.micro.pm)
+- API - [api.micro.pm](http://api.micro.pm)
+- Web UI - [web.micro.pm](http://web.micro.pm)
+- Sidecar - [proxy.micro.pm](http://proxy.micro.pm)
 
 ### Play via CLI
 
