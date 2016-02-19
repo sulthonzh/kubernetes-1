@@ -1,4 +1,4 @@
-# Micro Platform on Kubernetes
+# Micro on Kubernetes
 
 This repo provides the config to run the micro platform on kubernetes
 
