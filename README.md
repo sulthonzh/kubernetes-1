@@ -15,6 +15,10 @@ Currently config to run Micro on Kubernetes (Testing on Google Container Engine)
 - Platform - All the micro platform services
 - Misc - other miscellaneous services
 
+Missing
+
+- Dashboards (currently not open source)
+
 ## Demo
 
 Micro Demo (SSL soon):
