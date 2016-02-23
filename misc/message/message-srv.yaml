@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: message-srv
+spec:
+  replicas: 1
+  selector:
+    name: message-srv
+  template:
+    metadata:
+      labels:
+        name: message-srv
+    spec:
+      containers:
+        - name: discovery
+          command: [
+		"/message-srv",
+		"--registry=consul",
+		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+                "--sync_address=$(REGISTRY_SERVICE_HOST):$(REGISTRY_SERVICE_PORT)",
+		"--logtostderr",
+		"--server_address=0.0.0.0:9090",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/message-srv
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: message-port
