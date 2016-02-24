@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
         - name: car
+          resources:
+            limits:
+              cpu: "10m"
           command: [ "/micro", "--registry=consul", "--registry_address=$(REGISTRY_SERVICE_HOST)", "--logtostderr", "sidecar" ]
           image: microhq/micro
           imagePullPolicy: Always

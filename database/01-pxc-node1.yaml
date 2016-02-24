@@ -32,7 +32,7 @@ spec:
       containers:
         - resources:
             limits: 
-              cpu: 0.3
+              cpu: 0.1
           image: capttofu/percona_xtradb_cluster_5_6:beta
           name: pxc-node1
           ports:

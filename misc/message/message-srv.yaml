@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
         - name: discovery
+          resources:
+            limits:
+              cpu: "50m"
           command: [
 		"/message-srv",
 		"--registry=consul",

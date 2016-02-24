@@ -16,7 +16,7 @@ spec:
         - name: geo-web
           resources:
             limits:
-              cpu: "200m"
+              cpu: "50m"
           command: [
 		"/geo-web",
 		"--registry=consul",
