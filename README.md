@@ -16,12 +16,9 @@ Currently config to run Micro on Kubernetes (Testing on Google Container Engine)
 - Registry - Service Discovery using consul
 - Database - Percona with Galera (single cluster for now)
 - Micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
-- Platform - All the micro platform services
+- Platform - All the micro platform services and dashboards
 - Misc - other miscellaneous services
 
-Missing
-
-- Dashboards (currently not open source)
 
 ## Demo
 
