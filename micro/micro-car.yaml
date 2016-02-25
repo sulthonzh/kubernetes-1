@@ -17,7 +17,15 @@ spec:
           resources:
             limits:
               cpu: "10m"
-          command: [ "/micro", "--registry=consul", "--registry_address=$(REGISTRY_SERVICE_HOST)", "--logtostderr", "sidecar" ]
+          command: [
+            "/micro",
+            "--registry=consul",
+            "--registry_address=$(REGISTRY_SERVICE_HOST)",
+            "--logtostderr",
+            "--register_ttl=60",
+            "--register_interval=30",
+            "sidecar"
+          ]
           image: microhq/micro
           imagePullPolicy: Always
           ports:

@@ -14,7 +14,15 @@ spec:
     spec:
       containers:
         - name: api
-          command: [ "/micro", "--registry=consul", "--registry_address=$(REGISTRY_SERVICE_HOST)", "--logtostderr", "api" ]
+          command: [
+            "/micro",
+            "--registry=consul",
+            "--registry_address=$(REGISTRY_SERVICE_HOST)",
+            "--logtostderr",
+            "--register_ttl=60",
+            "--register_interval=30",
+            "api"
+          ]
           image: microhq/micro
           imagePullPolicy: Always
           ports:
