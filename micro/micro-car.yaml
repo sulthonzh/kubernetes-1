@@ -24,6 +24,7 @@ spec:
             "--logtostderr",
             "--register_ttl=60",
             "--register_interval=30",
+            "--enable_stats",
             "sidecar"
           ]
           image: microhq/micro

@@ -24,6 +24,8 @@ spec:
             "--logtostderr",
             "--register_ttl=60",
             "--register_interval=30",
+            "--web_cors=http://web.micro.pm",
+            "--enable_stats",
             "web"
           ]
           image: microhq/micro
