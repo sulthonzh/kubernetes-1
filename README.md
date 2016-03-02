@@ -64,3 +64,14 @@ topic:micro.monitor.status
 topic:micro.trace.span
 topic:platform.router.stats
 ```
+
+### Screenshots
+-
+![1](https://github.com/micro/kubernetes/blob/master/doc/1.png)
+-
+![2](https://github.com/micro/kubernetes/blob/master/doc/2.png)
+-
+![3](https://github.com/micro/kubernetes/blob/master/doc/3.png)
+-
+![4](https://github.com/micro/kubernetes/blob/master/doc/4.png)
+
