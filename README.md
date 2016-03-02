@@ -66,7 +66,6 @@ topic:platform.router.stats
 ```
 
 ### Screenshots
--
 ![1](https://github.com/micro/kubernetes/blob/master/doc/1.png)
 -
 ![2](https://github.com/micro/kubernetes/blob/master/doc/2.png)
