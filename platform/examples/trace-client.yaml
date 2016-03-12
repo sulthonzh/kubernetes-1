@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: example-client
+spec:
+  replicas: 1
+  selector:
+    name: example-client
+  template:
+    metadata:
+      labels:
+        name: example-client
+    spec:
+      containers:
+        - name: example
+          resources:
+            limits:
+              cpu: "10m"
+          command: [
+		"/main",
+		"--registry=consul",
+		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"--logtostderr",
+		"--server_address=0.0.0.0:9090",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/trace-example:client
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: example-port
