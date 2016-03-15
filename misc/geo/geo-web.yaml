@@ -20,8 +20,7 @@ spec:
           command: [
 		"/geo-web",
 		"--registry=consul",
-		"--registry_address=$(REGISTRY_SERVICE_HOST)",
-		"--logtostderr"
+		"--registry_address=$(REGISTRY_SERVICE_HOST)"
 	  ]
           image: microhq/geo-web
           imagePullPolicy: Always

@@ -21,7 +21,6 @@ spec:
                 "/platform",
                 "--registry=consul",
                 "--registry_address=$(REGISTRY_SERVICE_HOST)",
-                "--logtostderr",
                 "--server_address=0.0.0.0:9090",
                 "--register_ttl=60",
                 "--register_interval=30",

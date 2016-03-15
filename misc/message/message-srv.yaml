@@ -22,7 +22,6 @@ spec:
 		"--registry=consul",
 		"--registry_address=$(REGISTRY_SERVICE_HOST)",
                 "--sync_address=$(REGISTRY_SERVICE_HOST):$(REGISTRY_SERVICE_PORT)",
-		"--logtostderr",
 		"--server_address=0.0.0.0:9090",
 		"--broker_address=0.0.0.0:10001"
 	  ]

@@ -2,33 +2,30 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   namespace: default
-  name: platform-monitor
+  name: greeter-srv
 spec:
   replicas: 1
   selector:
-    name: platform-monitor
+    name: greeter-srv
   template:
     metadata:
       labels:
-        name: platform-monitor
+        name: greeter-srv
     spec:
       containers:
-        - name: monitor
+        - name: discovery
+          resources:
+            limits:
+              cpu: "10m"
           command: [
-		"/platform",
+		"/greeter-srv",
 		"--registry=consul",
 		"--registry_address=$(REGISTRY_SERVICE_HOST)",
 		"--server_address=0.0.0.0:9090",
-		"--broker_address=0.0.0.0:10001",
-		"--register_ttl=60",
-		"--register_interval=30",
-		"monitor",
-		"srv"
+		"--broker_address=0.0.0.0:10001"
 	  ]
-          image: microhq/platform
+          image: microhq/greeter-srv
           imagePullPolicy: Always
           ports:
           - containerPort: 9090
-            name: monitor-port
-          - containerPort: 10001
-            name: broker-port
+            name: greeter-port

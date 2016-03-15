@@ -21,7 +21,6 @@ spec:
             "/micro",
             "--registry=consul",
             "--registry_address=$(REGISTRY_SERVICE_HOST)",
-            "--logtostderr",
             "--register_ttl=60",
             "--register_interval=30",
             "--enable_stats",
