@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  namespace: default
+  name: micro-bot
+spec:
+  replicas: 1
+  selector:
+    name: micro-bot
+  template:
+    metadata:
+      labels:
+        name: micro-bot
+    spec:
+      containers:
+        - name: bot
+          resources:
+            limits:
+              cpu: "10m"
+          command: [
+            "/micro",
+            "--registry=consul",
+            "--registry_address=$(REGISTRY_SERVICE_HOST)",
+            "--register_ttl=60",
+            "--register_interval=30",
+            "bot",
+	    "--inputs=slack",
+	    "--slack_token=YOUR_TOKEN_HERE"
+          ]
+          image: microhq/micro:bot
+          imagePullPolicy: Always
