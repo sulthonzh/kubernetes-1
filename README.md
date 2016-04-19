@@ -1,6 +1,6 @@
 # Micro on Kubernetes
 
-This repo provides the config to run the Micro on Kubernetes
+This repo provides the config to run Micro on Kubernetes
 
 An example deployment is currently running at [web.micro.pm](http://web.micro.pm) 
 leveraging Google Container Engine.
