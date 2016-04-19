@@ -42,28 +42,66 @@ go.micro.srv.auth
 go.micro.srv.config
 go.micro.srv.db
 go.micro.srv.discovery
-go.micro.srv.event
-go.micro.srv.geo
-go.micro.srv.monitor
-go.micro.srv.router
-go.micro.srv.trace
-go.micro.web
-go.micro.web.discovery
-go.micro.web.event
-go.micro.web.geo
-go.micro.web.monitor
-go.micro.web.trace
-topic:geo.location
-topic:micro.config.watch
-topic:micro.discovery.heartbeat
-topic:micro.discovery.watch
-topic:micro.event.record
-topic:micro.monitor.healthcheck
-topic:micro.monitor.stats
-topic:micro.monitor.status
-topic:micro.trace.span
-topic:platform.router.stats
+...
 ```
+
+### Getting Started
+
+If you want to run the demo yourself, look no further.
+
+Here's the steps I took to get started.
+
+###### Kubernetes on Google Container Engine
+
+Google Container Engine is the easiest way to run a managed kubernetes cluster. What's even better? $300 free credit for 60 days.
+
+1. Get yourself a Free Trial of Google Container Engine https://cloud.google.com/free-trial/
+2. Spin up a 3-4 node Kubernetes cluster
+3. Setup your kubectl command https://cloud.google.com/container-engine/docs/before-you-begin
+
+###### Launch all the things
+
+This repo contains all the kubernetes config files with docker images prebaked. Just kick them off and all should be well. 
+
+If you don't want to run everything you can just start what's in the registry/ and micro/ directories. We'll start there anyway.
+
+First you may want to change the hostnames for CORS support in the API and WEB proxy. We're running a live demo on these hostnames 
+hence them being present.
+
+```
+$ find . -name *.yaml | xargs grep micro.pm
+./micro/micro-api.yaml:            "--api_cors=http://api.micro.pm",
+./micro/micro-web.yaml:            "--web_cors=http://web.micro.pm",
+```
+
+Ok next.
+
+1. Start Registry
+2. Start Micro
+
+Optional:
+
+3. Start Database
+4. Start Platform
+5. Start Miscellaneous Services
+
+###### Starting things
+
+We'll start the registry and micro first
+```
+for dir in registry micro; do
+	pushd $dir
+	for config in *.yaml; do
+		kubectl create -f $config
+	done
+	popd
+done
+```
+
+###### Start optional things
+
+Look in database/ to see how to bootstrap the DB. It requires running some commands for databases, tables and grants. 
+Otherwise use same method as above to start the database, platform and other services.
 
 ### Screenshots
 ![1](https://github.com/micro/kubernetes/blob/master/doc/1.png)
