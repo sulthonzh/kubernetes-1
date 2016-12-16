@@ -1,31 +1,29 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   namespace: default
-  name: geo-srv
+  name: geo-api
 spec:
   replicas: 1
-  selector:
-    name: geo-srv
   template:
     metadata:
       labels:
-        name: geo-srv
+        name: geo-api
     spec:
       containers:
         - name: discovery
           resources:
-            limits:
-              cpu: "50m"
+            requests:
+              cpu: "20m"
           command: [
-		"/geo-srv",
-		"--registry=consul",
-		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"/geo-api",
+		"--registry=kubernetes",
+		"--selector=cache",
 		"--server_address=0.0.0.0:9090",
 		"--broker_address=0.0.0.0:10001"
 	  ]
-          image: microhq/geo-srv
+          image: microhq/geo-api:kubernetes
           imagePullPolicy: Always
           ports:
           - containerPort: 9090
-            name: geo-srv-port
+            name: geo-api-port

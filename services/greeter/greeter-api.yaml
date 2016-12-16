@@ -1,31 +1,29 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   namespace: default
-  name: greeter-srv
+  name: greeter-api
 spec:
   replicas: 1
-  selector:
-    name: greeter-srv
   template:
     metadata:
       labels:
-        name: greeter-srv
+        name: greeter-api
     spec:
       containers:
         - name: discovery
           resources:
-            limits:
-              cpu: "10m"
+            requests:
+              cpu: "20m"
           command: [
-		"/greeter-srv",
-		"--registry=consul",
-		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"/greeter-api",
+		"--registry=kubernetes",
+		"--selector=cache",
 		"--server_address=0.0.0.0:9090",
 		"--broker_address=0.0.0.0:10001"
 	  ]
-          image: microhq/greeter-srv
+          image: microhq/greeter-api:kubernetes
           imagePullPolicy: Always
           ports:
           - containerPort: 9090
-            name: greeter-port
+            name: api-port

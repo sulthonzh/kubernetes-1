@@ -1,31 +1,30 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   namespace: default
-  name: geo-api
+  name: greeter-srv
 spec:
   replicas: 1
-  selector:
-    name: geo-api
   template:
     metadata:
       labels:
-        name: geo-api
+        name: greeter-srv
+        micro: go.micro.srv.greeter
     spec:
       containers:
         - name: discovery
           resources:
             limits:
-              cpu: "50m"
+              cpu: "10m"
           command: [
-		"/geo-api",
-		"--registry=consul",
-		"--registry_address=$(REGISTRY_SERVICE_HOST)",
+		"/greeter-srv",
+		"--registry=kubernetes",
+		"--selector=cache",
 		"--server_address=0.0.0.0:9090",
 		"--broker_address=0.0.0.0:10001"
 	  ]
-          image: microhq/geo-api
+          image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
           - containerPort: 9090
-            name: geo-api-port
+            name: greeter-port

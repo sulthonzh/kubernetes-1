@@ -4,7 +4,7 @@
 cmd=$1
 dir=$2
 kube=kubectl
-list=( database registry micro misc platform )
+list=( micro os services )
 
 start() {
 	if [ -z $dir ]; then
@@ -20,10 +20,6 @@ start() {
 		$kube create -f $file
 	done
 
-	if [ -z $dir ] || [ "$dir" == "database" ]; then
-		node=`kubectl get pods | grep pxc-node3 | awk '{print $1}'`
-		echo "Run \"kubectl exec $node -i -t -- mysql -u root -p -h pxc-cluster\" and install DBs in database/platform.sql"
-	fi
 }
 
 stop() {

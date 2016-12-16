@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: greeter-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: greeter-web
+    spec:
+      containers:
+        - name: greeter-web
+          resources:
+            requests:
+              cpu: "20m"
+          command: [
+		"/greeter-web",
+		"--registry=kubernetes",
+		"--selector=cache",
+	  ]
+          image: microhq/greeter-web:kubernetes
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9090
+            name: web-port
