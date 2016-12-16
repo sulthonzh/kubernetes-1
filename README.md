@@ -5,9 +5,7 @@ This repo provides the config to run Micro on Kubernetes
 An example deployment is currently running at [web.micro.pm](http://web.micro.pm) 
 leveraging Google Container Engine.
 
-Note: This is by no means a highly available deployment. It's for testing purposes. 
-In the future we'll lay out a highly scalable and fault tolerant regional and 
-global deployment model.
+Note: This is by no means a highly available deployment
 
 ## What's in the repo?
 
@@ -18,7 +16,7 @@ Currently config to run Micro on Kubernetes (Testing on Google Container Engine)
 
 ## Demo
 
-Micro Demo (SSL soon):
+Live demo can be found at the URLs below
 
 - API - [api.micro.pm](http://api.micro.pm)
 - Web UI - [web.micro.pm](http://web.micro.pm)
@@ -30,24 +28,24 @@ The Micro CLI now supports proxying via the sidecar. Try it out.
 
 ```shell
 micro --proxy_address=proxy.micro.pm list services
-consul
 go.micro.api
 go.micro.api.geo
+go.micro.api.greeter
+go.micro.bot
 go.micro.sidecar
-go.micro.srv.auth
-go.micro.srv.config
-go.micro.srv.db
-go.micro.srv.discovery
-...
+go.micro.srv.geo
+go.micro.srv.greeter
+go.micro.web
+go.micro.web.geo
+go.micro.web.greeter
+topic:geo.location
 ```
 
 ## Getting Started
 
-If you want to run the demo yourself, look no further.
-
 Here's the steps I took to get started.
 
-### Kubernetes on Google Container Engine
+### Run Kubernetes
 
 Google Container Engine is the easiest way to run a managed kubernetes cluster. What's even better? $300 free credit for 60 days.
 
@@ -57,7 +55,7 @@ Google Container Engine is the easiest way to run a managed kubernetes cluster. 
 
 Visit the [Quickstart](https://cloud.google.com/container-engine/docs/quickstart) guide
 
-### Run Everything
+### Run Micro
 
 Make sure kubectl is in your path
 
@@ -74,7 +72,7 @@ $ find . -name *.yaml | xargs grep micro.pm
 ./micro/micro-web.yaml:            "--web_cors=http://web.micro.pm",
 ```
 
-## Demo Screenshots
+## Screenshots
 ![1](https://github.com/micro/kubernetes/blob/master/doc/1.png)
 -
 ![2](https://github.com/micro/kubernetes/blob/master/doc/2.png)
