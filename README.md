@@ -50,11 +50,8 @@ Here's the steps I took to get started.
 
 GKE is the easiest way to run a managed kubernetes cluster. What's even better? $300 free credit for 60 days.
 
-1. Get yourself a Free Trial of Google Container Engine https://cloud.google.com/free-trial/
-2. Spin up a 3 node cluster
-3. Setup your kubectl command https://cloud.google.com/container-engine/docs/before-you-begin
-
-Visit the [Quickstart](https://cloud.google.com/container-engine/docs/quickstart) guide
+1. Get yourself a [Free Trial](https://cloud.google.com/free-trial/) of Google Container Engine
+2. Visit the [Quickstart](https://cloud.google.com/container-engine/docs/quickstart) guide to create a cluster
 
 ### Run Micro
 
