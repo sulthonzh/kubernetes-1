@@ -5,15 +5,15 @@ This repo provides the config to run Micro on Kubernetes
 An example deployment is currently running at [web.micro.pm](http://web.micro.pm) 
 leveraging Google Container Engine.
 
+Services make use of the [kubernetes registry](https://github.com/micro/go-plugins/tree/master/registry/kubernetes) 
+plugin so there's zero external dependency for service discovery.
+
 ## What's in the repo?
 
 Currently config to run Micro on Kubernetes (Testing on Google Container Engine).
 
 - Micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
 - Services - Some example micro services
-
-All services make use of the [kubernetes registry](https://github.com/micro/go-plugins/tree/master/registry/kubernetes) 
-plugin which means there's zero external dependencies for service discovery.
 
 ## Demo
 
