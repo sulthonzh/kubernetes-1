@@ -18,7 +18,6 @@ spec:
             "--register_ttl=60",
             "--register_interval=30",
             "--selector=cache",
-            "--api_cors=http://api.micro.pm",
             "--enable_stats",
             "api"
           ]

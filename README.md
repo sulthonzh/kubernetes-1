@@ -60,22 +60,3 @@ Make sure kubectl is in your path
 ```shell
 ./run.sh start
 ```
-
-You may want to change the hostnames for CORS support in the API and WEB proxy. We're running a live demo on these hostnames 
-hence them being present.
-
-```shell
-$ find . -name *.yaml | xargs grep micro.pm
-./micro/micro-api.yaml:            "--api_cors=http://api.micro.pm",
-./micro/micro-web.yaml:            "--web_cors=http://web.micro.pm",
-```
-
-## Screenshots
-![1](https://github.com/micro/kubernetes/blob/master/doc/1.png)
--
-![2](https://github.com/micro/kubernetes/blob/master/doc/2.png)
--
-![3](https://github.com/micro/kubernetes/blob/master/doc/3.png)
--
-![4](https://github.com/micro/kubernetes/blob/master/doc/4.png)
-
