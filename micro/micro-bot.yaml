@@ -22,8 +22,8 @@ spec:
             "--register_interval=30",
             "--selector=cache",
             "bot",
-	    "--inputs=slack",
-	    "--slack_token=YOUR_SLACK_TOKEN"
+            "--inputs=slack",
+            "--slack_token=YOUR_SLACK_TOKEN"
           ]
           image: microhq/micro:bot
           imagePullPolicy: Always
