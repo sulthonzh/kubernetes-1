@@ -8,7 +8,7 @@ plugin so there's zero external dependency for service discovery.
 ## What's in the repo?
 
 - cmd/micro - a preinitialised version of the micro toolkit with the kubernetes registry
- * go get github.com/micro/kubernetes/cmd/micro
+	* go get github.com/micro/kubernetes/cmd/micro
 - config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
 - config/services - Some example micro services
 
@@ -29,4 +29,5 @@ Make sure kubectl is in your path
 
 ```shell
 ./run.sh start
+
 ```
