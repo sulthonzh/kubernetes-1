@@ -7,10 +7,10 @@ plugin so there's zero external dependency for service discovery.
 
 ## What's in the repo?
 
-Currently config to run Micro on Kubernetes (Testing on Google Container Engine).
-
-- Micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
-- Services - Some example micro services
+- cmd/micro - a preinitialised version of the micro toolkit with the kubernetes registry
+ * go get github.com/micro/kubernetes/cmd/micro
+- config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
+- config/services - Some example micro services
 
 ## Getting Started
 
