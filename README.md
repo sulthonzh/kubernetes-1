@@ -9,6 +9,8 @@ plugin so there's zero external dependency for service discovery.
 
 - cmd/micro - a preinitialised version of the micro toolkit with the kubernetes registry
 	* go get github.com/micro/kubernetes/cmd/micro
+- cmd/health - a healthcheck sidecar for kubernetes
+	* run in the pod and set a http healthcheck which calls your rpc service
 - config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
 - config/services - Some example micro services
 
