@@ -5,7 +5,7 @@ This repo provides the config to run Micro on Kubernetes
 Services make use of the [kubernetes registry](https://github.com/micro/go-plugins/tree/master/registry/kubernetes) 
 plugin so there's zero external dependency for service discovery.
 
-## What's in the repo?
+## Contents
 
 - cmd/micro - a preinitialised version of the micro toolkit with the kubernetes registry
 	* go get github.com/micro/kubernetes/cmd/micro
@@ -13,6 +13,7 @@ plugin so there's zero external dependency for service discovery.
 	* run in the pod and set a http healthcheck which calls your rpc service
 - config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
 - config/services - Some example micro services
+- go/micro - a pre-initialiser for a go-micro service with k8s registry and grpc transport
 
 ## Getting Started
 
@@ -35,12 +36,31 @@ Make sure kubectl is in your path
 ./run.sh start
 ```
 
-### Micro Toolkit
+### Toolkit
 
 Get a preinitialised version of the micro toolkit with the kubernetes registry
 
 ```
 go get github.com/micro/kubernetes/cmd/micro
+```
+
+### Writing a Service
+
+Write a service as you would any other [go-micro](https://github.com/micro/go-micro) service.
+
+```
+import (
+	"github.com/micro/go-micro"
+	k8s "github.com/micro/kubernetes/go/micro"
+)
+
+func main() {
+	service := k8s.NewService(
+		micro.Name("my.service")
+	)
+	service.Init()
+	service.Run()
+}
 ```
 
 ### Build Yourself
