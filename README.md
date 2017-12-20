@@ -36,14 +36,6 @@ Make sure kubectl is in your path
 ./run.sh start
 ```
 
-### Toolkit
-
-Get a preinitialised version of the micro toolkit with the kubernetes registry
-
-```
-go get github.com/micro/kubernetes/cmd/micro
-```
-
 ### Writing a Service
 
 Write a service as you would any other [go-micro](https://github.com/micro/go-micro) service.
@@ -62,6 +54,15 @@ func main() {
 	service.Run()
 }
 ```
+
+### Toolkit
+
+Get a preinitialised version of the micro toolkit with the kubernetes registry
+
+```
+go get github.com/micro/kubernetes/cmd/micro
+```
+
 
 ### Build Yourself
 
