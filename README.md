@@ -1,19 +1,27 @@
 # Micro on Kubernetes
 
-This repo provides the config to run Micro on Kubernetes
+This repo provides pre-initialised versions of go-micro and the micro toolkit for kubernetes.
 
 Services make use of the [kubernetes registry](https://github.com/micro/go-plugins/tree/master/registry/kubernetes) 
-plugin so there's zero external dependency for service discovery.
+plugin so there's zero external dependency for service discovery and the grpc plugins to make use of gRPC for 
+communication.
 
 ## Contents
 
+Toolkit, go-micro initialisers and healthchecking sidecar:
+
 - cmd/micro - a preinitialised version of the micro toolkit with the kubernetes registry
 	* go get github.com/micro/kubernetes/cmd/micro
-- cmd/health - a healthcheck sidecar for kubernetes
+- cmd/health - a healthchecking sidecar for kubernetes
 	* run in the pod and set a http healthcheck which calls your rpc service
+	* exposes /health http endpoint
+- go/micro - a pre-initialiser for a go-micro service with k8s registry and grpc transport
+	* service := micro.NewService()
+
+Example configs:
+
 - config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
 - config/services - Some example micro services
-- go/micro - a pre-initialiser for a go-micro service with k8s registry and grpc transport
 
 ## Getting Started
 
