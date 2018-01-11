@@ -10,12 +10,14 @@ import (
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"
 	proto "github.com/micro/go-micro/server/debug/proto"
+	gcli "github.com/micro/go-plugins/client/grpc"
 	_ "github.com/micro/go-plugins/registry/kubernetes"
 	"golang.org/x/net/context"
 )
 
 func init() {
 	os.Setenv("MICRO_REGISTRY", "kubernetes")
+	client.DefaultClient = gcli.NewClient()
 }
 
 var (
