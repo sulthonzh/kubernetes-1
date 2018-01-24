@@ -27,7 +27,8 @@ var (
 )
 
 func main() {
-	cmd.DefaultFlags = append(cmd.DefaultFlags, cli.StringFlag{
+	app := cmd.App()
+	app.Flags = append(app.Flags, cli.StringFlag{
 		Name:        "health_address",
 		EnvVar:      "MICRO_HEALTH_ADDRESS",
 		Usage:       "Address for the health checker. 127.0.0.1:8080",
@@ -35,7 +36,7 @@ func main() {
 		Destination: &healthAddress,
 	})
 
-	cmd.DefaultCmd.App().Action = func(c *cli.Context) {
+	app.Action = func(c *cli.Context) {
 		serverName = c.String("server_name")
 		serverAddress = c.String("server_address")
 

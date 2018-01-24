@@ -112,11 +112,12 @@ spec:
           ports:
           - containerPort: 9091
             name: greeter-port
-        - name: liveness
+        - name: health
           command: [
 		"/health",
+                "--health_address=0.0.0.0:8080",
 		"--server_name=greeter",
-		"--server_address=localhost:9091"
+		"--server_address=0.0.0.0:9091"
 	  ]
           image: microhq/health:kubernetes
           livenessProbe:

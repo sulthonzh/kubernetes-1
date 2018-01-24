@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: default
-  name: greeter-srv
+  name: greeter
 spec:
   replicas: 1
   template:
@@ -12,19 +12,28 @@ spec:
         micro: go.micro.srv.greeter
     spec:
       containers:
-        - name: discovery
-          resources:
-            limits:
-              cpu: "10m"
+        - name: greeter
           command: [
 		"/greeter-srv",
-		"--registry=kubernetes",
-		"--selector=cache",
-		"--server_address=0.0.0.0:9090",
+		"--server_address=0.0.0.0:9091",
 		"--broker_address=0.0.0.0:10001"
 	  ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
-          - containerPort: 9090
+          - containerPort: 9091
             name: greeter-port
+        - name: health
+          command: [
+		"/health",
+                "--health_address=0.0.0.0:8080",
+		"--server_name=greeter",
+		"--server_address=0.0.0.0:9091"
+	  ]
+          image: microhq/health:kubernetes
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
