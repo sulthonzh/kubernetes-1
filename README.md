@@ -17,6 +17,7 @@ Micro on Kubernetes is a pre-tuned version of micro/go-micro for k8s.
 - [Deploying a Service](#deploying-a-service)
 - [Healthchecking Sidecar](#healthchecking-sidecar)
 - [K8s Load Balancing](#k8s-load-balancing)
+- [Contribute](#contribute)
 
 ## Installing Micro
 
@@ -252,3 +253,12 @@ kubectl create -f service.yaml
 ```
 
 Calling micro service "greeter" from your service will route to the k8s service greeter:8080.
+
+## Contribute
+
+We're looking for contributions from the community to help guide the development of Micro on Kubernetes
+
+### TODO
+
+- Integrate service mesh - provide config to inject istio, conduit, etc
+- Example multi-service app - provide a microservice app example 
