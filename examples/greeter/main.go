@@ -21,9 +21,7 @@ func (s *Say) Hello(ctx context.Context, req *hello.Request, rsp *hello.Response
 
 func main() {
 	service := k8s.NewService(
-		micro.Name("go.micro.srv.greeter"),
-		micro.RegisterTTL(time.Second*30),
-		micro.RegisterInterval(time.Second*10),
+		micro.Name("greeter"),
 	)
 
 	service.Init()
