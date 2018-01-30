@@ -17,8 +17,8 @@ Micro on Kubernetes is a pre-tuned version of micro/go-micro for k8s.
 
 Example configs:
 
-- config/micro - API, Web UI and Sidecar (spins up GCE Load Balancers)
-- config/services - Some example micro services
+- config/micro - k8s config for the micro api, web and sidecar
+- config/service - example k8s deployments
 
 ## Getting Started
 
