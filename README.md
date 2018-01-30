@@ -22,10 +22,30 @@ Example configs:
 
 ## Getting Started
 
+- [Installing Micro](#installing-micro)
 - [Writing a Service](#writing-a-service)
-- [Install Micro](#install-micro)
+- [Deploying a Service](#deploying-a-service)
 - [Healthchecking Sidecar](#healthchecking-sidecar)
 - [K8s Load Balancing](#k8s-load-balancing)
+
+### Installing Micro
+
+
+```
+go get github.com/micro/kubernetes/cmd/micro
+```
+
+or
+
+```
+docker pull microhq/micro:kubernetes
+```
+
+For go-micro
+
+```
+import "github.com/micro/kubernetes/go/micro"
+```
 
 ### Writing a Service
 
@@ -46,16 +66,41 @@ func main() {
 }
 ```
 
-### Install Micro
+### Deploying a Service
+
+Here's an example k8s deployment for a micro service
 
 ```
-go get github.com/micro/kubernetes/cmd/micro
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: greeter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: greeter-srv
+    spec:
+      containers:
+        - name: greeter
+          command: [
+		"/greeter-srv",
+		"--server_address=0.0.0.0:8080",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/greeter-srv:kubernetes
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9091
+            name: greeter-port
 ```
 
-or
+Deploy with kubectl
 
 ```
-docker pull microhq/micro:kubernetes
+kubectl create -f greeter.yaml
 ```
 
 ### Healthchecking Sidecar
@@ -134,8 +179,7 @@ Micro includes client side load balancing by default but kubernetes also provide
 We can offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) 
 and k8s services.
 
-Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080
-
+Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080. 
 Read about the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static).
 
 To use the selector when running your service specific the flag or env var 
@@ -150,7 +194,37 @@ or
 ./service --selector=static
 ```
 
-Then ensure you create a k8s Service for each micro service. 
+An example deployment
+
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: greeter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: greeter-srv
+    spec:
+      containers:
+        - name: greeter
+          command: [
+		"/greeter-srv",
+		"--selector=static",
+		"--server_address=0.0.0.0:8080",
+		"--broker_address=0.0.0.0:10001"
+	  ]
+          image: microhq/greeter-srv:kubernetes
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 9091
+            name: greeter-port
+```
+
+Ensure you create a k8s Service for each micro service. 
 
 Calling micro service "greeter" will route to the k8s service greeter:8080.
 
@@ -167,4 +241,10 @@ spec:
     protocol: TCP
   selector:
     app: greeter
+```
+
+Deploy with kubectl
+
+```
+kubectl create -f service.yaml
 ```
