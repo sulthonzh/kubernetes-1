@@ -6,6 +6,7 @@ Micro on Kubernetes is a pre-tuned version of micro/go-micro for k8s.
 
 - No external dependencies
 - Client side discovery caching
+- Optional k8s service load balancing
 - gRPC transport protocol
 - Pre-initialised toolkit
 
