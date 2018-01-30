@@ -49,7 +49,7 @@ import (
 
 func main() {
 	service := k8s.NewService(
-		micro.Name("my.service")
+		micro.Name("greeter")
 	)
 	service.Init()
 	service.Run()
@@ -83,7 +83,7 @@ spec:
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
-          - containerPort: 9091
+          - containerPort: 8080
             name: greeter-port
 ```
 
@@ -151,7 +151,7 @@ spec:
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
-          - containerPort: 9091
+          - containerPort: 8080
             name: greeter-port
         - name: health
           command: [
@@ -220,7 +220,7 @@ spec:
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
-          - containerPort: 9091
+          - containerPort: 8080
             name: greeter-port
 ```
 

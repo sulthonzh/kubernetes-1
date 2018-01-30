@@ -21,7 +21,7 @@ spec:
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
-          - containerPort: 9091
+          - containerPort: 8080
             name: greeter-port
         - name: health
           command: [
