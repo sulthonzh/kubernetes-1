@@ -2,7 +2,9 @@
 
 Micro on Kubernetes is kubernetes native micro.
 
-Micro is a microservice toolkit. Kubernetes is a container orchestrator. Together they provide the foundations for a microservice platform.
+Micro is a microservice toolkit. Kubernetes is a container orchestrator.
+
+Together they provide the foundations for a microservice platform.
 
 ## Features
 
