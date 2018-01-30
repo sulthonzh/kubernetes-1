@@ -9,13 +9,13 @@ spec:
     metadata:
       labels:
         name: greeter-srv
-        micro: go.micro.srv.greeter
     spec:
       containers:
         - name: greeter
           command: [
 		"/greeter-srv",
-		"--server_address=0.0.0.0:9091",
+		"--server_name=greeter",
+		"--server_address=0.0.0.0:8080",
 		"--broker_address=0.0.0.0:10001"
 	  ]
           image: microhq/greeter-srv:kubernetes
@@ -26,15 +26,15 @@ spec:
         - name: health
           command: [
 		"/health",
-                "--health_address=0.0.0.0:8080",
+                "--health_address=0.0.0.0:8081",
 		"--server_name=greeter",
-		"--server_address=0.0.0.0:9091"
+		"--server_address=0.0.0.0:8080"
 	  ]
           image: microhq/health:kubernetes
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 8081
             initialDelaySeconds: 3
             periodSeconds: 3
