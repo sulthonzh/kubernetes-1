@@ -95,8 +95,10 @@ kubectl create -f greeter.yaml
 
 ## Healthchecking Sidecar
 
-The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service
+The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service. 
+Every go-micro service has a built in Debug.Health endpoint.
 
+### Install healthchecker
 
 ```
 go get github.com/micro/health
@@ -107,6 +109,8 @@ or
 ```
 docker pull microhq/health:kubernetes
 ```
+
+### Run healtchecker
 
 Run e.g healthcheck greeter service with address localhost:9091
 
@@ -119,6 +123,8 @@ Call the healthchecker on localhost:8080
 ```
 curl http://localhost:8080/health
 ```
+
+### K8s Deployment
 
 Add to a kubernetes deployment
 
