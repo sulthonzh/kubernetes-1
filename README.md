@@ -218,7 +218,7 @@ spec:
             name: greeter-port
 ```
 
-### K8s Service
+### K8s Service
 
 The static selector offloads load balancing to k8s services. So ensure you create a k8s Service for each micro service. 
 
