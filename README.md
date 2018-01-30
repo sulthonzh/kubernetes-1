@@ -41,7 +41,7 @@ import "github.com/micro/kubernetes/go/micro"
 
 Write a service as you would any other [go-micro](https://github.com/micro/go-micro) service.
 
-```
+```go
 import (
 	"github.com/micro/go-micro"
 	k8s "github.com/micro/kubernetes/go/micro"
