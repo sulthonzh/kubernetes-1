@@ -4,7 +4,7 @@
 cmd=$1
 dir=$2
 kube=kubectl
-list=( config/micro config/services )
+list=( config/micro config/service )
 
 start() {
 	if [ -z $dir ]; then
