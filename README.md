@@ -10,17 +10,6 @@ Micro on Kubernetes is a pre-tuned version of micro/go-micro for k8s.
 - gRPC transport protocol
 - Pre-initialised toolkit
 
-## Contents
-
-- go/micro - pre-initialised go-micro
-- cmd/micro - pre-initialised micro toolkit
-- cmd/health - a healthchecking sidecar 
-
-Example configs:
-
-- config/micro - k8s config for the micro api, web and sidecar
-- config/service - example k8s deployments
-
 ## Getting Started
 
 - [Installing Micro](#installing-micro)
@@ -29,7 +18,7 @@ Example configs:
 - [Healthchecking Sidecar](#healthchecking-sidecar)
 - [K8s Load Balancing](#k8s-load-balancing)
 
-### Installing Micro
+## Installing Micro
 
 
 ```
@@ -48,7 +37,7 @@ For go-micro
 import "github.com/micro/kubernetes/go/micro"
 ```
 
-### Writing a Service
+## Writing a Service
 
 Write a service as you would any other [go-micro](https://github.com/micro/go-micro) service.
 
@@ -67,7 +56,7 @@ func main() {
 }
 ```
 
-### Deploying a Service
+## Deploying a Service
 
 Here's an example k8s deployment for a micro service
 
@@ -104,7 +93,7 @@ Deploy with kubectl
 kubectl create -f greeter.yaml
 ```
 
-### Healthchecking Sidecar
+## Healthchecking Sidecar
 
 The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service
 
@@ -174,7 +163,7 @@ spec:
             periodSeconds: 3
 ```
 
-### K8s Load Balancing
+## K8s Load Balancing
 
 Micro includes client side load balancing by default but kubernetes also provides Service load balancing strategies. 
 We can offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) 
@@ -183,7 +172,9 @@ and k8s services.
 Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080. 
 Read about the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static).
 
-To use the selector when running your service specific the flag or env var 
+### Usage
+
+To use the static selector when running your service specify the flag or env var 
 
 ```
 MICRO_SELECTOR=static ./service
@@ -194,6 +185,8 @@ or
 ```
 ./service --selector=static
 ```
+
+### K8s Deployment
 
 An example deployment
 
@@ -225,9 +218,11 @@ spec:
             name: greeter-port
 ```
 
-Ensure you create a k8s Service for each micro service. 
+### K8s Service
 
-Calling micro service "greeter" will route to the k8s service greeter:8080.
+The static selector offloads load balancing to k8s services. So ensure you create a k8s Service for each micro service. 
+
+Here's a sample service
 
 ```
 apiVersion: v1
@@ -249,3 +244,5 @@ Deploy with kubectl
 ```
 kubectl create -f service.yaml
 ```
+
+Calling micro service "greeter" from your service will route to the k8s service greeter:8080.
