@@ -4,10 +4,10 @@ Micro on Kubernetes is a pre-tuned version of micro/go-micro for k8s.
 
 ## Features
 
-- Kubernetes registry
-- gRPC client and server
-- caching selector
-- pre-initialised toolkit
+- No external dependencies
+- Client side discovery caching
+- gRPC transport protocol
+- Pre-initialised toolkit
 
 ## Contents
 
