@@ -265,5 +265,6 @@ We're looking for contributions from the community to help guide the development
 ### TODO
 
 - Integrate service mesh - provide config to inject istio, conduit, etc
+- Integrate metaparticle - the ability to create self deploying microservices
 - Example multi-service app - provide a microservice app example
 - Micro as k8s api extenstons - provide config to setup the micro api as a k8s extension
