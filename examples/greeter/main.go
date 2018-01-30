@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"time"
 
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 	"github.com/micro/go-micro"
