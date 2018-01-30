@@ -17,10 +17,6 @@ spec:
               cpu: "10m"
           command: [
             "/micro",
-            "--registry=kubernetes",
-            "--register_ttl=60",
-            "--register_interval=30",
-            "--selector=cache",
             "bot",
             "--inputs=slack",
             "--slack_token=YOUR_SLACK_TOKEN"
