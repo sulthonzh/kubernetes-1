@@ -1,13 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	hello "github.com/micro/examples/greeter/srv/proto/hello"
 	"github.com/micro/go-micro"
 	k8s "github.com/micro/kubernetes/go/micro"
-
-	"golang.org/x/net/context"
 )
 
 type Say struct{}

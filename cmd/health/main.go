@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"os"
@@ -12,7 +13,6 @@ import (
 	proto "github.com/micro/go-micro/server/debug/proto"
 	gcli "github.com/micro/go-plugins/client/grpc"
 	_ "github.com/micro/go-plugins/registry/kubernetes"
-	"golang.org/x/net/context"
 )
 
 func init() {
