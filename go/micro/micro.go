@@ -9,19 +9,15 @@ import (
 	"github.com/micro/go-plugins/selector/cache"
 
 	// static selector offloads load balancing to k8s services
-	// enable with MICRO_SELECTOR=static or --selector=static
-	// requires user to create k8s services
-	_ "github.com/micro/go-plugins/selector/static"
+	// note: requires user to create k8s services
+	"github.com/micro/go-plugins/selector/static"
 )
 
 // NewService returns a new go-micro service pre-initialised for k8s
 func NewService(opts ...micro.Option) micro.Service {
 	// create registry and selector
 	r := kubernetes.NewRegistry()
-
-	s := cache.NewSelector(
-		selector.Registry(r),
-	)
+	s := static.NewSelector()
 
 	// set the registry and selector
 	options := []micro.Option{

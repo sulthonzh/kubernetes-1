@@ -18,6 +18,7 @@ import (
 
 func init() {
 	os.Setenv("MICRO_REGISTRY", "kubernetes")
+	os.Setenv("MICRO_SELECTOR", "static")
 	client.DefaultClient = cli.NewClient()
 	server.DefaultServer = srv.NewServer()
 }

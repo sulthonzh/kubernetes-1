@@ -20,8 +20,8 @@ Together they provide the foundations for a microservice platform.
 - [Installing Micro](#installing-micro)
 - [Writing a Service](#writing-a-service)
 - [Deploying a Service](#deploying-a-service)
-- [Healthchecking Sidecar](#healthchecking-sidecar)
-- [K8s Load Balancing](#k8s-load-balancing)
+- [Healthchecking](#healthchecking-sidecar)
+- [Load Balancing](#k8s-load-balancing)
 - [Using Service Mesh](#using-service-mesh)
 - [Contribute](#contribute)
 
@@ -67,6 +67,8 @@ func main() {
 
 Here's an example k8s deployment for a micro service
 
+### Create a Deployment
+
 ```
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -100,12 +102,35 @@ Deploy with kubectl
 kubectl create -f greeter.yaml
 ```
 
+### Create a Service
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: greeter
+  labels:
+    app: greeter
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: greeter
+```
+
+Deploy with kubectl
+
+```
+kubectl create -f greeter-svc.yaml
+```
+
 ## Healthchecking Sidecar
 
 The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service. 
 Every go-micro service has a built in Debug.Health endpoint.
 
-### Install healthchecker
+### Install
 
 ```
 go get github.com/micro/health
@@ -117,7 +142,7 @@ or
 docker pull microhq/health:kubernetes
 ```
 
-### Run healtchecker
+### Run
 
 Run e.g healthcheck greeter service with address localhost:9091
 
@@ -133,7 +158,7 @@ curl http://localhost:8080/health
 
 ### K8s Deployment
 
-Add to a kubernetes deployment
+Add the healthcecking sidecar to a kubernetes deployment
 
 ```
 apiVersion: extensions/v1beta1
@@ -176,20 +201,23 @@ spec:
             periodSeconds: 3
 ```
 
-## K8s Load Balancing
+## Load Balancing
 
 Micro includes client side load balancing by default but kubernetes also provides Service load balancing strategies. 
-We can offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) 
-and k8s services.
+In **micro on kubernetes** we offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) and k8s services.
 
 Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080. 
 Read about the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static).
 
 This approach handles both initial connection load balancing and health checks since Kubernetes services stop routing traffic to unhealthy services, but if you want to use long lived connections such as the ones in gRPC protocol, a service-mesh like [Conduit](https://conduit.io/), [Istio](https://istio.io) and [Linkerd](https://linkerd.io/) should be prefered to handle service discovery, routing and failure. 
 
+Note: The static selector is enabled by default.
+
 ### Usage
 
-To use the static selector when running your service specify the flag or env var 
+To manually set the static selector when running your service specify the flag or env var 
+
+Note: This is already enabled by default
 
 ```
 MICRO_SELECTOR=static ./service
@@ -201,7 +229,7 @@ or
 ./service --selector=static
 ```
 
-### K8s Deployment
+### Deployment
 
 An example deployment
 
@@ -222,7 +250,6 @@ spec:
         - name: greeter
           command: [
 		"/greeter-srv",
-		"--selector=static",
 		"--server_address=0.0.0.0:8080",
 		"--broker_address=0.0.0.0:10001"
 	  ]
@@ -239,7 +266,7 @@ Deploy with kubectl
 kubectl create -f deployment-static-selector.yaml
 ```
 
-### K8s Service
+### Service
 
 The static selector offloads load balancing to k8s services. So ensure you create a k8s Service for each micro service. 
 
@@ -319,7 +346,6 @@ spec:
         - name: greeter
           command: [
 		"/greeter-srv",
-	  "--selector=static",
 		"--server_address=0.0.0.0:8080",
 		"--broker_address=0.0.0.0:10001"
 	  ]
