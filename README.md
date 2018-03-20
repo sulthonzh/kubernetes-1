@@ -21,7 +21,7 @@ Together they provide the foundations for a microservice platform.
 - [Deploying a Service](#deploying-a-service)
 - [Healthchecking Sidecar](#healthchecking-sidecar)
 - [K8s Load Balancing](#k8s-load-balancing)
-- [K8s Load Balancing using service-mesh](#integrating-with-conduit-service-mesh)
+- [Using Service Mesh](#using-service-mesh)
 - [Contribute](#contribute)
 
 ## Installing Micro
@@ -267,14 +267,19 @@ kubectl create -f service.yaml
 
 Calling micro service "greeter" from your service will route to the k8s service greeter:8080.
 
-## Integrating with Conduit service-mesh
-**ATTENTION**: Conduit is under heavy development and is not currently production ready.
+## Using Service Mesh
+
+[Conduit](https://conduit.io/) is a service mesh which can be easily integrated with Micro on Kubernetes.
+
+Note: Conduit is under heavy development and is not currently production ready.
+
+### Install
 
 In order to install conduit in your cluster you should first install Conduit CLI using
 
 ```curl https://run.conduit.io/install | sh```
 
-And finnaly add Conduit CLI binary to your $PATH.
+And finaly add Conduit CLI binary to your $PATH.
 
 ```export PATH=$PATH:$HOME/.conduit/bin```
 
@@ -289,6 +294,8 @@ To check for conduit status run
 Once every component have been started you are able to start running services using conduit service mesh. To access conduit web dashboard where you can see your service mesh run 
 
 ```conduit dashboard```
+
+### Deploy
 
 To start deploying apps to use conduit it is important to use [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) because conduit and other service meshes use kubernetes services as a service discovery mechanism.
 
