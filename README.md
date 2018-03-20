@@ -9,10 +9,11 @@ Together they provide the foundations for a microservice platform.
 ## Features
 
 - No external dependencies
-- Client side discovery caching
-- Optional k8s service load balancing
-- gRPC transport protocol
-- Pre-initialised toolkit
+- K8s native services
+- Service mesh integration
+- gRPC communication protocol
+- Pre-initialised micro images
+- Healthchecking sidecar
 
 ## Getting Started
 
