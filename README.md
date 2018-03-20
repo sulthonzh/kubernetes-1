@@ -327,7 +327,7 @@ Once every component have been started you are able to start running services us
 
 To start deploying apps to use conduit it is important to use [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) because conduit and other service meshes use kubernetes services as a service discovery mechanism.
 
-To deploy greeter service with health checking and conduit sidecar you will not need to change anything. As you see this deployment script is similar to last one.
+To deploy greeter service with health checking and conduit sidecar you will not need to change anything. Use the same deployment as above.
 
 ```
 apiVersion: extensions/v1beta1
@@ -376,7 +376,7 @@ Use conduit inject to inject conduit-init container that will setup conduit-prox
 conduit inject deployment.yaml | kubectl apply -f -
 ```
 
-Now lets create a sample kubernetes service
+Now lets create a kubernetes service
 
 ```
 apiVersion: v1
@@ -399,7 +399,7 @@ Deploy with kubectl
 kubectl create -f service.yaml
 ```
 
-Now your deployment is completed. Go to conduit's dashboard to look for this deployment and to check for inbound and outbound connections.
+Now your deployment is complete. Go to conduit's dashboard to look for this deployment and to check for inbound and outbound connections.
 
 *If your service uses Websockets, MySQL and other protocols please read [conduit docs](https://conduit.io/adding-your-service/).*
 
