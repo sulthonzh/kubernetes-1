@@ -12,13 +12,8 @@ spec:
     spec:
       containers:
         - name: discovery
-          resources:
-            requests:
-              cpu: "20m"
           command: [
 		"/greeter-api",
-		"--registry=kubernetes",
-		"--selector=cache",
 		"--server_address=0.0.0.0:9090",
 		"--broker_address=0.0.0.0:10001"
 	  ]

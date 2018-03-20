@@ -12,13 +12,8 @@ spec:
     spec:
       containers:
         - name: greeter-web
-          resources:
-            requests:
-              cpu: "20m"
           command: [
-		"/greeter-web",
-		"--registry=kubernetes",
-		"--selector=cache",
+		"/greeter-web"
 	  ]
           image: microhq/greeter-web:kubernetes
           imagePullPolicy: Always
