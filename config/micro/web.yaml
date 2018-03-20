@@ -12,12 +12,11 @@ spec:
     spec:
       containers:
         - name: web
-          resources:
-            limits:
-              cpu: "25m"
+          env:
+          - name: MICRO_ENABLE_STATS
+            value: true
           command: [
             "/micro",
-            "--enable_stats",
             "web"
           ]
           image: microhq/micro:kubernetes

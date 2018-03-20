@@ -12,9 +12,6 @@ spec:
     spec:
       containers:
         - name: bot
-          resources:
-            limits:
-              cpu: "10m"
           command: [
             "/micro",
             "bot",

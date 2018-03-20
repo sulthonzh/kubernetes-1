@@ -12,9 +12,11 @@ spec:
     spec:
       containers:
         - name: api
+          env:
+          - name: MICRO_ENABLE_STATS
+            value: true
           command: [
             "/micro",
-            "--enable_stats",
             "api"
           ]
           image: microhq/micro:kubernetes

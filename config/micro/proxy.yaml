@@ -2,26 +2,25 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   namespace: default
-  name: micro-car
+  name: micro-proxy
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        name: micro-car
+        name: micro-proxy
     spec:
       containers:
-        - name: car
-          resources:
-            limits:
-              cpu: "10m"
+        - name: proxy
+          env:
+          - name: MICRO_ENABLE_STATS
+            value: true
           command: [
             "/micro",
-            "--enable_stats",
-            "sidecar"
+            "proxy"
           ]
           image: microhq/micro:kubernetes
           imagePullPolicy: Always
           ports:
           - containerPort: 8081
-            name: car-port
+            name: proxy-port
