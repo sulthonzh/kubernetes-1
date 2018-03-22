@@ -410,8 +410,9 @@ We're looking for contributions from the community to help guide the development
 
 ### TODO
 
-- Integrate metaparticle - the ability to create self deploying microservices
-- Example multi-service app - provide a microservice app example
-- K8s api extenstons - provide config to setup the micro api as a k8s extension
+- Add example multi-service application
+- Add [go-config](https://github.com/micro/go-config) with k8s config map support
+- Add k8s api extension for micro api
+- Integrate [metaparticle](https://github.com/metaparticle-io/package)
+- Add deployment command - `micro run app`
 - Support for micro functions
-- Easy deployment scripts
