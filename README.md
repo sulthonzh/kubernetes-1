@@ -21,7 +21,7 @@ Together they provide the foundations for a microservice platform.
 - [Writing a Service](#writing-a-service)
 - [Deploying a Service](#deploying-a-service)
 - [Healthchecking](#healthchecking-sidecar)
-- [Load Balancing](#k8s-load-balancing)
+- [Load Balancing](#load-balancing)
 - [Using Service Mesh](#using-service-mesh)
 - [Contribute](#contribute)
 
