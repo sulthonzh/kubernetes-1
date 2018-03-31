@@ -158,7 +158,7 @@ curl http://localhost:8080/health
 
 ### K8s Deployment
 
-Add the healthcecking sidecar to a kubernetes deployment
+Add the healthchecking sidecar to a kubernetes deployment
 
 ```
 apiVersion: extensions/v1beta1
