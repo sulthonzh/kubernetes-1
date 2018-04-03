@@ -20,6 +20,7 @@ Together they provide the foundations for a microservice platform.
 - [Installing Micro](#installing-micro)
 - [Writing a Service](#writing-a-service)
 - [Deploying a Service](#deploying-a-service)
+- [Writing a Web Service](#writing-a-web-service)
 - [Healthchecking](#healthchecking-sidecar)
 - [Load Balancing](#load-balancing)
 - [Using Service Mesh](#using-service-mesh)
@@ -124,6 +125,31 @@ Deploy with kubectl
 ```
 kubectl create -f greeter-svc.yaml
 ```
+
+## Writing a Web Service
+
+Write a web service as you would any other [go-web](https://github.com/micro/go-web) service.
+
+```go
+import (
+	"net/http"
+
+	"github.com/micro/go-web"
+	k8s "github.com/micro/kubernetes/go/web"
+)
+
+func main() {
+	service := k8s.NewService(
+		web.Name("greeter"),
+	)
+
+	service.HandleFunc("/greeter", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(`hello world`))
+	})
+
+	service.Init()
+	service.Run()
+}
 
 ## Healthchecking Sidecar
 
