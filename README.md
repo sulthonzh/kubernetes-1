@@ -150,6 +150,7 @@ func main() {
 	service.Init()
 	service.Run()
 }
+```
 
 ## Healthchecking Sidecar
 
