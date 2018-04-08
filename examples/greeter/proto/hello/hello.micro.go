@@ -18,9 +18,9 @@ import fmt "fmt"
 import math "math"
 
 import (
-	context "context"
 	client "github.com/micro/go-micro/client"
 	server "github.com/micro/go-micro/server"
+	context "context"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -41,29 +41,29 @@ var _ server.Option
 
 // Client API for Say service
 
-type SayClient interface {
+type SayService interface {
 	Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
 }
 
-type sayClient struct {
+type sayService struct {
 	c           client.Client
 	serviceName string
 }
 
-func NewSayClient(serviceName string, c client.Client) SayClient {
+func SayServiceClient(serviceName string, c client.Client) SayService {
 	if c == nil {
 		c = client.NewClient()
 	}
 	if len(serviceName) == 0 {
 		serviceName = "go.micro.srv.greeter"
 	}
-	return &sayClient{
+	return &sayService{
 		c:           c,
 		serviceName: serviceName,
 	}
 }
 
-func (c *sayClient) Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+func (c *sayService) Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
 	req := c.c.NewRequest(c.serviceName, "Say.Hello", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)

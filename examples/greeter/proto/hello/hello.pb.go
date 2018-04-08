@@ -17,6 +17,11 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import (
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
+)
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -63,6 +68,78 @@ func (m *Response) GetMsg() string {
 func init() {
 	proto.RegisterType((*Request)(nil), "go.micro.srv.greeter.Request")
 	proto.RegisterType((*Response)(nil), "go.micro.srv.greeter.Response")
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// Client API for Say service
+
+type SayClient interface {
+	Hello(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+}
+
+type sayClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewSayClient(cc *grpc.ClientConn) SayClient {
+	return &sayClient{cc}
+}
+
+func (c *sayClient) Hello(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := grpc.Invoke(ctx, "/go.micro.srv.greeter.Say/Hello", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Say service
+
+type SayServer interface {
+	Hello(context.Context, *Request) (*Response, error)
+}
+
+func RegisterSayServer(s *grpc.Server, srv SayServer) {
+	s.RegisterService(&_Say_serviceDesc, srv)
+}
+
+func _Say_Hello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SayServer).Hello(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/go.micro.srv.greeter.Say/Hello",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SayServer).Hello(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Say_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "go.micro.srv.greeter.Say",
+	HandlerType: (*SayServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Hello",
+			Handler:    _Say_Hello_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "github.com/micro/kubernetes/examples/greeter/proto/hello/hello.proto",
 }
 
 func init() {
