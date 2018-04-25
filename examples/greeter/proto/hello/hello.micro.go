@@ -46,25 +46,25 @@ type SayService interface {
 }
 
 type sayService struct {
-	c           client.Client
-	serviceName string
+	c    client.Client
+	name string
 }
 
-func SayServiceClient(serviceName string, c client.Client) SayService {
+func NewSayService(name string, c client.Client) SayService {
 	if c == nil {
 		c = client.NewClient()
 	}
-	if len(serviceName) == 0 {
-		serviceName = "go.micro.srv.greeter"
+	if len(name) == 0 {
+		name = "go.micro.srv.greeter"
 	}
 	return &sayService{
-		c:           c,
-		serviceName: serviceName,
+		c:    c,
+		name: name,
 	}
 }
 
 func (c *sayService) Hello(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.serviceName, "Say.Hello", in)
+	req := c.c.NewRequest(c.name, "Say.Hello", in)
 	out := new(Response)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -80,13 +80,20 @@ type SayHandler interface {
 }
 
 func RegisterSayHandler(s server.Server, hdlr SayHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Say{hdlr}, opts...))
+	type say interface {
+		Hello(ctx context.Context, in *Request, out *Response) error
+	}
+	type Say struct {
+		say
+	}
+	h := &sayHandler{hdlr}
+	s.Handle(s.NewHandler(&Say{h}, opts...))
 }
 
-type Say struct {
+type sayHandler struct {
 	SayHandler
 }
 
-func (h *Say) Hello(ctx context.Context, in *Request, out *Response) error {
+func (h *sayHandler) Hello(ctx context.Context, in *Request, out *Response) error {
 	return h.SayHandler.Hello(ctx, in, out)
 }
