@@ -24,6 +24,7 @@ Together they provide the foundations for a microservice platform.
 - [Healthchecking](#healthchecking-sidecar)
 - [Load Balancing](#load-balancing)
 - [Using Service Mesh](#using-service-mesh)
+- [Using Config Map](#using-config-map)
 - [Contribute](#contribute)
 
 ## Installing Micro
@@ -431,15 +432,58 @@ Now your deployment is complete. Go to conduit's dashboard to look for this depl
 *If your service uses Websockets, MySQL and other protocols please read [conduit docs](https://conduit.io/adding-your-service/).*
 
 
+## Using Config Map
+
+[Go Config](https://github.com/micro/go-config) is a simple way to manage dynamic configuration. We've provided a pre-initialised version 
+which reads from environment variables and the k8s config map.
+
+It uses the `default` namespace and expects a configmap with name `micro` to be present.
+
+### Example
+
+Create a configmap
+
+```
+// we recommend to setup your variables from multiples files example:
+$ kubectl create configmap micro --namespace default --from-file=./testdata
+
+// verify if were set correctly with
+$ kubectl get configmap micro --namespace default
+{
+    "apiVersion": "v1",
+    "data": {
+        "config": "host=0.0.0.0\nport=1337",
+        "mongodb": "host=127.0.0.1\nport=27017\nuser=user\npassword=password",
+        "redis": "url=redis://127.0.0.1:6379/db01"
+    },
+    "kind": "ConfigMap",
+    "metadata": {
+        ...
+        "name": "micro",
+        "namespace": "default",
+        ...
+    }
+}
+```
+
+Import and use the config
+
+```go
+import "github.com/micro/kubernetes/go/config"
+
+cfg := config.NewConfig()
+
+// the example above "mongodb": "host=127.0.0.1\nport=27017\nuser=user\npassword=password" will be accessible as:
+conf.Get("mongodb", "host") // 127.0.0.1
+conf.Get("mongodb", "port") // 27017
+```
+
 ## Contribute
 
 We're looking for contributions from the community to help guide the development of Micro on Kubernetes
 
 ### TODO
 
+- Fix k8s namespace/service name issue
 - Add example multi-service application
-- Add [go-config](https://github.com/micro/go-config) with k8s config map support
-- Add k8s api extension for micro api
-- Integrate [metaparticle](https://github.com/metaparticle-io/package)
-- Add deployment command - `micro run app`
-- Support for micro functions
+- Add k8s CRD for micro apps
