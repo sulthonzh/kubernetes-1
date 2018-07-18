@@ -161,7 +161,7 @@ Every go-micro service has a built in Debug.Health endpoint.
 ### Install
 
 ```
-go get github.com/micro/health
+go get github.com/micro/kubernetes/cmd/health
 ```
 
 or
