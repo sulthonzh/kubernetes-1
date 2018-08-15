@@ -58,7 +58,7 @@ import (
 
 func main() {
 	service := k8s.NewService(
-		micro.Name("greeter")
+		micro.Name("greeter"),
 	)
 	service.Init()
 	service.Run()
