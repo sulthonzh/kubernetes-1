@@ -20,8 +20,6 @@ const (
 	StatusInvalidArguments = 1
 	// StatusConnectionFailure indicates connection failed.
 	StatusConnectionFailure = 2
-	// StatusRPCFailure indicates rpc failed.
-	StatusRPCFailure = 3
 	// StatusUnhealthy indicates rpc succeeded but indicates unhealthy service.
 	StatusUnhealthy = 4
 )
