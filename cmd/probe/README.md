@@ -41,7 +41,7 @@ spec:
                 "/health_probe",
                 "--server_name=greeter",
                 "--server_address=0.0.0.0:8080"
--`              ]
+              ]
 ```
 
 
