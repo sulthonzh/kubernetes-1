@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
   name: greeter-web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: greeter-web
   template:
     metadata:
       labels:
@@ -13,8 +16,8 @@ spec:
       containers:
         - name: greeter-web
           command: [
-		"/greeter-web"
-	  ]
+		    "/greeter-web"
+          ]
           image: microhq/greeter-web:kubernetes
           imagePullPolicy: Always
           ports:
