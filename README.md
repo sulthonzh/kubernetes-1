@@ -4,7 +4,7 @@ Micro on Kubernetes is kubernetes native micro services.
 
 ## Overview
 
-Micro is a blueprint for cloud-native development. Kubernetes is a container orchestrator system. 
+Micro is a blueprint for cloud-native development. Kubernetes is a container orchestration system. 
 Together they provide the foundations for a microservice platform. Micro on Kubernetes 
 provides a kubernetes native runtime to help build micro services.
 
@@ -74,7 +74,7 @@ Here's an example k8s deployment for a micro service
 ### Create a Deployment
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
@@ -191,7 +191,7 @@ curl http://localhost:8080/health
 Add the healthchecking sidecar to a kubernetes deployment
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
@@ -264,7 +264,7 @@ or
 An example deployment
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
@@ -360,7 +360,7 @@ To start deploying apps to use conduit it is important to use [static selector](
 To deploy greeter service with health checking and conduit sidecar you will not need to change anything. Use the same deployment as above.
 
 ```
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
