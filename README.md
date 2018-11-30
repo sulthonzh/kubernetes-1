@@ -4,7 +4,7 @@ Micro on Kubernetes is kubernetes native micro services.
 
 ## Overview
 
-Micro is a blueprint for cloud-native toolkit. Kubernetes is a container orchestrator system. 
+Micro is a blueprint for cloud-native development. Kubernetes is a container orchestrator system. 
 Together they provide the foundations for a microservice platform. Micro on Kubernetes 
 provides a kubernetes native runtime to help build micro services.
 
