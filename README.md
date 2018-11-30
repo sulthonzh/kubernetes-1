@@ -1,10 +1,12 @@
 # Micro on Kubernetes [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GoDoc](https://godoc.org/github.com/micro/kubernetes/go/micro?status.svg)](https://godoc.org/github.com/micro/kubernetes) [![Travis CI](https://api.travis-ci.org/micro/kubernetes.svg?branch=master)](https://travis-ci.org/micro/kubernetes) [![Go Report Card](https://goreportcard.com/badge/micro/kubernetes)](https://goreportcard.com/report/github.com/micro/kubernetes)
 
-Micro on Kubernetes is kubernetes native micro.
+Micro on Kubernetes is kubernetes native micro services.
 
-Micro is a microservice toolkit. Kubernetes is a container orchestrator.
+## Overview
 
-Together they provide the foundations for a microservice platform.
+Micro is a blueprint for cloud-native toolkit. Kubernetes is a container orchestrator system. 
+Together they provide the foundations for a microservice platform. Micro on Kubernetes 
+provides a kubernetes native runtime to help build micro services.
 
 ## Features
 
@@ -325,9 +327,9 @@ Calling micro service "greeter" from your service will route to the k8s service 
 
 ## Using Service Mesh
 
-[Conduit](https://conduit.io/) is a service mesh which can be easily integrated with Micro on Kubernetes.
+Note: Conduit is now [linkerd2](https://linkerd.io/)
 
-Note: Conduit is under heavy development and is not currently production ready.
+[Conduit](https://conduit.io/) is a service mesh which can be easily integrated with Micro on Kubernetes.
 
 ### Install
 
