@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: default
   name: greeter-api
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: greeter-api
   template:
     metadata:
       labels:
