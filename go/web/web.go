@@ -1,12 +1,9 @@
 package web
 
 import (
-	"os"
-
-	"github.com/micro/go-micro/client"
-	"github.com/micro/go-micro/server"
+	"github.com/micro/go-micro"
 	cli "github.com/micro/go-plugins/client/grpc"
-	_ "github.com/micro/go-plugins/registry/kubernetes"
+	"github.com/micro/go-plugins/registry/kubernetes"
 	srv "github.com/micro/go-plugins/server/grpc"
 	"github.com/micro/go-web"
 
@@ -16,23 +13,29 @@ import (
 	"github.com/micro/go-plugins/selector/static"
 )
 
-func init() {
-	// set grpc transport
-	client.DefaultClient = cli.NewClient()
-	server.DefaultServer = srv.NewServer()
-
-	// set the static selector
-	os.Setenv("MICRO_SELECTOR", "static")
-
-	client.DefaultClient.Init(
-		client.Selector(static.NewSelector()),
-	)
-
-	// set kubernetes registry
-	os.Setenv("MICRO_REGISTRY", "kubernetes")
-}
-
 // NewService returns a web service for kubernetes
 func NewService(opts ...web.Option) web.Service {
-	return web.NewService(opts...)
+	// setup
+	c := cli.NewClient()
+	s := srv.NewServer()
+	k := kubernetes.NewRegistry()
+	st := static.NewSelector()
+
+	// create new service
+	service := micro.NewService(
+		micro.Server(s),
+		micro.Client(c),
+		micro.Registry(k),
+		micro.Selector(st),
+	)
+
+	// prepend option
+	options := []web.Option{
+		web.MicroService(service),
+	}
+
+	options = append(options, opts...)
+
+	// return new service
+	return web.NewService(options...)
 }
