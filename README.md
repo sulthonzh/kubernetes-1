@@ -1,10 +1,10 @@
 # Micro on Kubernetes [![License](https://img.shields.io/:license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![GoDoc](https://godoc.org/github.com/micro/kubernetes/go/micro?status.svg)](https://godoc.org/github.com/micro/kubernetes) [![Travis CI](https://api.travis-ci.org/micro/kubernetes.svg?branch=master)](https://travis-ci.org/micro/kubernetes) [![Go Report Card](https://goreportcard.com/badge/micro/kubernetes)](https://goreportcard.com/report/github.com/micro/kubernetes)
 
-Micro on Kubernetes is kubernetes native micro services.
+Micro on Kubernetes is a kubernetes native micro service deployment.
 
 ## Overview
 
-Micro is a blueprint for cloud-native development. Kubernetes is a container orchestration system. 
+Micro is a blueprint for microservice development. Kubernetes is a container orchestration system. 
 Together they provide the foundations for a microservice platform. Micro on Kubernetes 
 provides a kubernetes native runtime to help build micro services.
 
