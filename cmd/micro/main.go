@@ -30,7 +30,7 @@ func main() {
 	os.Setenv("MICRO_SELECTOR", "static")
 
 	// setup broker/client/server
-	broker.DefaultClient = bkr.NewClient()
+	broker.DefaultBroker = bkr.NewBroker()
 	client.DefaultClient = cli.NewClient()
 	server.DefaultServer = srv.NewServer()
 
