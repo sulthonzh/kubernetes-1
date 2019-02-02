@@ -3,8 +3,10 @@ package main
 import (
 	"os"
 
+	"github.com/micro/go-micro/broker"
 	"github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/server"
+	bkr "github.com/micro/go-plugins/broker/grpc"
 	cli "github.com/micro/go-plugins/client/grpc"
 	_ "github.com/micro/go-plugins/registry/kubernetes"
 	srv "github.com/micro/go-plugins/server/grpc"
@@ -27,7 +29,8 @@ func main() {
 	os.Setenv("MICRO_REGISTRY", "kubernetes")
 	os.Setenv("MICRO_SELECTOR", "static")
 
-	// setup client/server
+	// setup broker/client/server
+	broker.DefaultClient = bkr.NewClient()
 	client.DefaultClient = cli.NewClient()
 	server.DefaultServer = srv.NewServer()
 
