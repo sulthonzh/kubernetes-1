@@ -11,7 +11,7 @@ require (
 	github.com/micro/go-plugins v0.24.1
 	github.com/micro/go-web v0.6.0
 	github.com/micro/micro v0.23.2
-	golang.org/x/net v0.0.0-20190125091013-d26f9f9a57f3
+	golang.org/x/net v0.0.0-20190206173232-65e2d4e15006
 	google.golang.org/grpc v1.18.0
 	sigs.k8s.io/structured-merge-diff v0.0.0-20190130003954-e5e029740eb8 // indirect
 )
