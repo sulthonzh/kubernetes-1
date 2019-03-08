@@ -92,9 +92,9 @@ spec:
       containers:
         - name: greeter
           command: [
-          "/greeter-srv",
-          "--server_address=0.0.0.0:8080",
-          "--broker_address=0.0.0.0:10001"
+            "/greeter-srv",
+            "--server_address=0.0.0.0:8080",
+            "--broker_address=0.0.0.0:10001"
           ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
@@ -212,9 +212,9 @@ spec:
       containers:
         - name: greeter
           command: [
-          "/greeter-srv",
-          "--server_address=0.0.0.0:8080",
-          "--broker_address=0.0.0.0:10001"
+            "/greeter-srv",
+            "--server_address=0.0.0.0:8080",
+            "--broker_address=0.0.0.0:10001"
           ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
@@ -223,10 +223,10 @@ spec:
             name: greeter-port
         - name: health
           command: [
-          "/health",
-                      "--health_address=0.0.0.0:8081",
-          "--server_name=greeter",
-          "--server_address=0.0.0.0:8080"
+            "/health",
+            "--health_address=0.0.0.0:8081",
+            "--server_name=greeter",
+            "--server_address=0.0.0.0:8080"
           ]
           image: microhq/health:kubernetes
           livenessProbe:
@@ -285,9 +285,9 @@ spec:
       containers:
         - name: greeter
           command: [
-          "/greeter-srv",
-          "--server_address=0.0.0.0:8080",
-          "--broker_address=0.0.0.0:10001"
+            "/greeter-srv",
+            "--server_address=0.0.0.0:8080",
+            "--broker_address=0.0.0.0:10001"
           ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
