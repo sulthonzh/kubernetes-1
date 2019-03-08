@@ -4,8 +4,8 @@ Micro on Kubernetes is a kubernetes native micro service deployment.
 
 ## Overview
 
-Micro is a blueprint for microservice development. Kubernetes is a container orchestration system. 
-Together they provide the foundations for a microservice platform. Micro on Kubernetes 
+Micro is a blueprint for microservice development. Kubernetes is a container orchestration system.
+Together they provide the foundations for a microservice platform. Micro on Kubernetes
 provides a kubernetes native runtime to help build micro services.
 
 ## Features
@@ -81,6 +81,9 @@ metadata:
   name: greeter
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: greeter-srv
   template:
     metadata:
       labels:
@@ -89,10 +92,10 @@ spec:
       containers:
         - name: greeter
           command: [
-		"/greeter-srv",
-		"--server_address=0.0.0.0:8080",
-		"--broker_address=0.0.0.0:10001"
-	  ]
+          "/greeter-srv",
+          "--server_address=0.0.0.0:8080",
+          "--broker_address=0.0.0.0:10001"
+          ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
@@ -157,7 +160,7 @@ func main() {
 
 ## Healthchecking Sidecar
 
-The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service. 
+The healthchecking sidecar exposes `/health` as a http endpoint and calls the rpc endpoint `Debug.Health` on a service.
 Every go-micro service has a built in Debug.Health endpoint.
 
 ### Install
@@ -198,6 +201,9 @@ metadata:
   name: greeter
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: greeter-srv
   template:
     metadata:
       labels:
@@ -206,10 +212,10 @@ spec:
       containers:
         - name: greeter
           command: [
-		"/greeter-srv",
-		"--server_address=0.0.0.0:8080",
-		"--broker_address=0.0.0.0:10001"
-	  ]
+          "/greeter-srv",
+          "--server_address=0.0.0.0:8080",
+          "--broker_address=0.0.0.0:10001"
+          ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
@@ -217,11 +223,11 @@ spec:
             name: greeter-port
         - name: health
           command: [
-		"/health",
-                "--health_address=0.0.0.0:8081",
-		"--server_name=greeter",
-		"--server_address=0.0.0.0:8080"
-	  ]
+          "/health",
+                      "--health_address=0.0.0.0:8081",
+          "--server_name=greeter",
+          "--server_address=0.0.0.0:8080"
+          ]
           image: microhq/health:kubernetes
           livenessProbe:
             httpGet:
@@ -233,19 +239,19 @@ spec:
 
 ## Load Balancing
 
-Micro includes client side load balancing by default but kubernetes also provides Service load balancing strategies. 
+Micro includes client side load balancing by default but kubernetes also provides Service load balancing strategies.
 In **micro on kubernetes** we offload load balancing to k8s by using the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static) and k8s services.
 
-Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080. 
+Rather than doing address resolution, the static selector returns the service name plus a fixed port e.g greeter returns greeter:8080.
 Read about the [static selector](https://github.com/micro/go-plugins/tree/master/selector/static).
 
-This approach handles both initial connection load balancing and health checks since Kubernetes services stop routing traffic to unhealthy services, but if you want to use long lived connections such as the ones in gRPC protocol, a service-mesh like [Conduit](https://conduit.io/), [Istio](https://istio.io) and [Linkerd](https://linkerd.io/) should be prefered to handle service discovery, routing and failure. 
+This approach handles both initial connection load balancing and health checks since Kubernetes services stop routing traffic to unhealthy services, but if you want to use long lived connections such as the ones in gRPC protocol, a service-mesh like [Conduit](https://conduit.io/), [Istio](https://istio.io) and [Linkerd](https://linkerd.io/) should be prefered to handle service discovery, routing and failure.
 
 Note: The static selector is enabled by default.
 
 ### Usage
 
-To manually set the static selector when running your service specify the flag or env var 
+To manually set the static selector when running your service specify the flag or env var
 
 Note: This is already enabled by default
 
@@ -279,10 +285,10 @@ spec:
       containers:
         - name: greeter
           command: [
-		"/greeter-srv",
-		"--server_address=0.0.0.0:8080",
-		"--broker_address=0.0.0.0:10001"
-	  ]
+          "/greeter-srv",
+          "--server_address=0.0.0.0:8080",
+          "--broker_address=0.0.0.0:10001"
+          ]
           image: microhq/greeter-srv:kubernetes
           imagePullPolicy: Always
           ports:
@@ -298,7 +304,7 @@ kubectl create -f deployment-static-selector.yaml
 
 ### Service
 
-The static selector offloads load balancing to k8s services. So ensure you create a k8s Service for each micro service. 
+The static selector offloads load balancing to k8s services. So ensure you create a k8s Service for each micro service.
 
 Here's a sample service
 
@@ -333,7 +339,7 @@ See [linkerd2](https://linkerd.io/) for usage.
 
 ## Using Config Map
 
-[Go Config](https://github.com/micro/go-config) is a simple way to manage dynamic configuration. We've provided a pre-initialised version 
+[Go Config](https://github.com/micro/go-config) is a simple way to manage dynamic configuration. We've provided a pre-initialised version
 which reads from environment variables and the k8s config map.
 
 It uses the `default` namespace and expects a configmap with name `micro` to be present.
